@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block style %}
+<link href="../static/styles/addpost.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <h1>edit post</h1>
+    <div class="linee"></div>
+    <form method="post" class="add" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="owner">
+            <img src="https://img.flawlessfiles.com/_r/100x100/100/avatar/zoro_normal/av-zz-04.jpeg">
+            <p>name</p>
+        </div>
+        {{ form.title(placeholder=form.title.label.text) }}
+        <div class="add_to_your_post">
+            <span>add to your post</span>
+            <div>
+                <img id="selected-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Selected Image">
+                {{ form.img(id='img-upload-field') }}
+                <button for="img-upload-field" onclick="document.getElementById('img-upload-field').click();" type="button">img</button>
+                <button>tag</button>
+                <button>ppl</button>
+            </div>
+        </div>
+        {{ form.button(class='add-post', value=form.button.label.text) }}
+    </form>
+
+    <script>
+        document.getElementById('img-upload-field').addEventListener('change', function() {
+            var selectedImg = document.getElementById('selected-img');
+            var fileInput = this;
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    selectedImg.src = e.target.result;
+                    selectedImg.classList.add('selected-img')
+                }
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+    </script>
+{% endblock %}

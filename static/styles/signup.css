@@ -1,0 +1,84 @@
+* {box-sizing: border-box;}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+.container h1 {
+    padding-bottom: 20px;
+}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  color: black;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 5px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: black;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+.blue {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  text-align: center;
+}
+
+.add_to_your_post {
+  display: flex;
+  justify-content: space-between; 
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+}
+.add_to_your_post div {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  justify-content: right;
+}
+.add_to_your_post span{
+  font-size: 20px;
+}
+.add_to_your_post div button {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.add_to_your_post div button:hover {
+  background-color: rgba(255, 255, 255, 0.123);
+}

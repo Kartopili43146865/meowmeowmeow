@@ -1,0 +1,262 @@
+<!-- templates/home.html -->
+
+{% extends 'base.html' %}
+{% block style %}
+<link href="../static/styles/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="profile">
+    <img class="pfp" src="{{ current_user.pfp }}">
+    <h1>{{current_user.name}}</h1>
+</div>
+<h1 class="txt">your posts:</h1>
+{% if your_posts | length == 0 %}
+    <h1 style="font-size: 60px; margin-left: 2%;">No Posts Yet</h1>
+{% endif %}
+
+{% for element in your_posts %}
+{% set loop_count = comments | selectattr('product_id', 'equalto', element.id) | list | length %}
+
+    <div x-data="{ open: false }">
+        <div x-show="open">{% include "comment.html"%}</div>
+        {% set d1 = element.created_at %}
+        {% set d2 = current_time %}
+        {% set delta = d2 - d1 %}
+        {% set time = (delta.total_seconds() - 14400) %}
+        <div class="post">
+            <div class="detals">
+                <div class="avtor">
+                   <img src="{{ element.pfp }}">
+                    <div>
+                        <p>
+                            {{element.username }} 
+                        </p>
+                        {% if time > 31104000 %}
+                        <span>{{(time / 31104000) | int}} year ago</span>
+                        {% elif time > 2592000 %}
+                        <span>{{(time / 2592000) | int}} month ago</span>
+                        {% elif time > 86400 %}
+                        <span>{{(time / 86400) | int}} day ago</span>
+                        {% elif time > 3600 %}
+                        <span>{{(time / 3600) | int}} hour ago</span>
+                        {% elif time > 60 %}
+                        <span>{{(time / 60) | int}} minute ago</span>
+                        {% else %}
+                        <span>{{time | int}} second ago</span>
+                        {% endif %}
+                 </div>
+                </div>
+                <div class="more" x-data="{visible: false}">
+                    <button class="btn" x-on:click="visible = !visible">...</button>
+                    <div x-show="visible">
+                        <a class="item" href="/edit/{{ element.id }}">edit</a>
+                        <a  href="/delete/{{ element.id }}" class="item">delete</a>
+                    </div>
+                </div> 
+            </div>
+            <img class="post-img" src="{{element.img}}">
+            <h2 class="title">{{element.title}}</h2>
+            <div class="line"></div>
+            <div class="reactions">
+                {% if current_user in element.liked_by %}
+                <form action="{{ url_for('like') }}" method="post" class="button clicked">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/like.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">like</p>
+                        <span>{{ element.like }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('like') }}" method="post" class="button">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/like.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">like</p>
+                        <span>{{ element.like }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% endif %}
+                
+                {% if current_user in element.disliked_by %}
+                <form action="{{ url_for('dislike') }}" method="post" class="button clicked">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+            <img class="pfp-icon" src="../static/images/icons/dislike.svg">
+            <div class="icon"></div>
+                    <div style="display: block;">
+                        <p class="like">dislike</p>
+                        <span>{{ element.dislike }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('dislike') }}" method="post" class="button">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/dislike.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">dislike</p>
+                        <span>{{ element.dislike }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% endif %}
+                <button class="button" x-on:click="open = true">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/comment.svg">
+                    </div>
+                    <div>
+                        <p>comment</p><span>{{ loop_count }}</span>
+                    </div>
+                </button>
+                    <div class="save icon">i</div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+
+
+
+<h1 class="txt">liked posts:</h1>
+
+
+{% if liked_posts | length == 0 %}
+    <h1 style="font-size: 60px; margin-left: 2%;">No Liked Posts Yet</h1>
+{% endif %}
+
+{% for element in liked_posts %}
+{% set loop_count = comments | selectattr('product_id', 'equalto', element.id) | list | length %}
+
+    <div x-data="{ open: false }">
+        <div x-show="open">{% include "comment.html"%}</div>
+        {% set d1 = element.created_at %}
+        {% set d2 = current_time %}
+        {% set delta = d2 - d1 %}
+        {% set time = (delta.total_seconds() - 14400) %}
+        <div class="post">
+            <div class="detals">
+                <div class="avtor">
+                   <img src="{{ element.pfp }}">
+                    <div>
+                        <p>
+                            {{element.username }} 
+                        </p>
+                        {% if time > 31104000 %}
+                        <span>{{(time / 31104000) | int}} year ago</span>
+                        {% elif time > 2592000 %}
+                        <span>{{(time / 2592000) | int}} month ago</span>
+                        {% elif time > 86400 %}
+                        <span>{{(time / 86400) | int}} day ago</span>
+                        {% elif time > 3600 %}
+                        <span>{{(time / 3600) | int}} hour ago</span>
+                        {% elif time > 60 %}
+                        <span>{{(time / 60) | int}} minute ago</span>
+                        {% else %}
+                        <span>{{time | int}} second ago</span>
+                        {% endif %}
+                 </div>
+                </div>
+                <div class="more" x-data="{visible: false}">
+                    <button class="btn" x-on:click="visible = !visible">...</button>
+                    <div x-show="visible">
+                        <a class="item" href="/edit/{{ element.id }}">edit</a>
+                        <a  href="/delete/{{ element.id }}" class="item">delete</a>
+                    </div>
+                </div> 
+            </div>
+            <img class="post-img" src="{{element.img}}">
+            <h2 class="title">{{element.title}}</h2>
+            <div class="line"></div>
+            <div class="reactions">
+                {% if current_user in element.liked_by %}
+                <form action="{{ url_for('like') }}" method="post" class="button clicked">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/like.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">like</p>
+                        <span>{{ element.like }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('like') }}" method="post" class="button">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/like.svg">
+
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">like</p>
+                        <span>{{ element.like }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% endif %}
+                
+                {% if current_user in element.disliked_by %}
+                <form action="{{ url_for('dislike') }}" method="post" class="button clicked">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/dislike.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">dislike</p>
+                        <span>{{ element.dislike }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('dislike') }}" method="post" class="button">
+                    <input type="hidden" name="post_id" value="{{ element.id }}">
+                    <button type="submit" class="like">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/dislike.svg">
+                    </div>
+                    <div style="display: block;">
+                        <p class="like">dislike</p>
+                        <span>{{ element.dislike }}</span>
+                    </div>
+                    </button>
+                </form>
+                {% endif %}
+                <button class="button" x-on:click="open = true">
+                    <div class="icon">
+            <img class="pfp-icon" src="../static/images/icons/comment.svg">
+                    </div>
+                    <div>
+                        <p>comment</p><span>{{ loop_count }}</span>
+                    </div>
+                </button>
+                    <div class="save icon">i</div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+        <script>
+            const imageElement = document.querySelectorAll('.post-img');
+
+            for(let i = 0; i < btns.length; i++){
+                imageElement[i].addEventListener('click', function() {
+                    window.open(imageElement[i].src, '_blank');
+                });
+            }
+           
+        </script>
+{% endblock %}

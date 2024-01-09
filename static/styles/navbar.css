@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+body {
+    background-color: #151B26;
+}
+nav {
+    width: 98%;
+    margin-left: 1%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav input {
+    width: 400px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #232A37;
+    border: none;
+    padding: 10px;
+}
+nav .btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+nav .btns .profile {
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: #232A37;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.registerr {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.registerr a {
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(71, 0, 71);
+    padding: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.name {
+    font-size: 25px;
+    text-decoration: none;
+}
+

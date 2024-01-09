@@ -1,0 +1,322 @@
+.posts {
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: #232A37;
+    overflow-y: scroll;
+}
+.post {
+    padding-top: 0.1px;
+    padding-bottom: 10px;
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #151B26;
+}
+.avtor {
+    display: flex;
+    margin: 2%;
+    gap: 5px;
+    align-items: center;
+}
+.avtor img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.avtor div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.avtor div span {
+    color: rgba(255, 255, 255, 0.397);
+    font-size: 14px;
+}
+.post-img {
+    width: 96%;
+    margin-left: 2%;
+    border-radius: 5px;
+    cursor: pointer;
+    max-height: 400px;
+    object-fit: cover;
+}
+.title {
+    margin-left: 2%;
+    display: flex;
+    max-width: 96%;
+    overflow-x: auto;
+}
+.line {
+    width: 96%;
+    margin-left: 2%;
+    height: 2px;
+    margin-top: 5px;
+    background-color: #232A37;
+}
+.reactions {
+    display: flex;
+    gap: 10px;
+    margin-left: 2%;
+    margin-top: 10px;
+}
+.reactions .button {
+    cursor: pointer;
+    display: flex;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    width: 90px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.1s;
+}
+.save {
+    margin-left: auto;
+    margin-right: 2%;
+    cursor: pointer;
+}
+.reactions .button:hover {
+    background-color: #232A37;
+}
+.reactions .icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    background-color: #232A37;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.reactions p {
+    color: rgba(255, 255, 255, 0.356);
+}
+.post .title {
+    font-size: 30px;
+}
+.add-post {
+    display: flex;
+    width: 96%;
+    height: 70px;
+    align-items: center;
+    margin-left: 2%;
+    background-color: #151B26;
+    margin-top: 10px;
+    border-radius: 5px;
+    justify-content: space-evenly;
+}
+
+.add-post img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.add-post a {
+    width: calc(95% - 100px);
+    height: 40px;
+    border-radius: 40px;
+    background-color: #232A37;
+    color: rgba(255, 255, 255, 0.527);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    user-select: none;
+    text-decoration: none;
+}
+.add-post .plus {
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: white;
+    padding-left: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 30px;
+}
+.add-post a:hover, .add-post div:hover {
+    background-color: #232a37af;
+}
+
+.detals {
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+    height: 60px;
+}
+.detals .more {
+    width: 30px;
+    transform: translateX(-40px);
+}
+.detals .more div {
+    background-color: #232a37af;
+    border-radius: 5px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-15px,15px);
+}
+.detals .more .btn {
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #232a37af;
+    border: none;
+    transform: translateY(10px);
+    margin-left: 50%;
+}
+.detals .more div .item {
+    cursor: pointer;
+    transition: 0.1s;
+    height: 35px;
+    border-radius: 0;
+    display: flex;
+    align-content: center;
+    background-color: #232a37af;
+    border: none;
+    align-items: center;
+    padding-left: 5px;
+    font-size: 16px;
+}
+.detals .more div .item:hover{
+    background-color: rgba(255, 255, 255, 0.144);
+}
+.more a {
+    text-decoration: none;
+}
+
+.visible {
+    visibility: visible!important;
+}
+.like {
+    background: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.clicked {
+    background: #232A37!important;
+}
+
+.comments {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52%,-50%);
+    border-radius: 20px;
+    width: 70%;
+    overflow-y: scroll;
+    max-height: 85vh;
+}
+.comment {
+    border-radius: 25px;
+    background-color: #232A37;
+    padding: 10px;
+    max-width: 92%;
+}
+.comment div {
+    overflow-x: auto;
+}
+.comment p {
+    padding-bottom: 5px;
+}
+.comment-avtor {
+    position: sticky;
+    top: -1px;
+    z-index: 2;
+    background-color: #151B26;
+}
+.comment-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    width: 100%;
+    height: 50px;
+}
+.close {
+    font-size: 37px;
+    cursor: pointer;
+    margin-right: 2%;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #232A37;
+    display: grid;
+    place-items: center;
+}
+.add-comment {
+    display: flex;
+    position: sticky;
+    bottom: -10px;
+    z-index: 2;
+    background-color: #151B26;
+    width: 96%;
+    margin-left: 2%;
+    padding-top: 10px;
+}
+.add-comment img {
+     border-radius: 50%;
+     width: 40px;
+     height: 40px;
+     margin-bottom: 10px;
+}
+.add-comment textarea{
+    margin-left: 1%;
+    background-color: rgba(255, 255, 255, 0.062);
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    height: 70px;
+    resize: none;
+}
+.add-comment .textarea {
+    display: flex;
+    width: 100%;
+}
+.add-comment .textarea .btn {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #151B26;
+    padding: 3px;
+}
+
+/* profile page */
+
+.txt {
+    margin-left: 2%;
+    margin-top: 40px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.pfp {
+    border-radius: 50%;
+    width: 170px;
+    height: 170px;
+    box-shadow: 0 0 5px black;
+}
+.name {
+    font-size: 40px;
+}

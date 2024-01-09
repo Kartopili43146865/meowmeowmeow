@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link href="../static/styles/signup.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+    <div class="container">
+      <h1>Register</h1>
+  
+      <label for="name"><b>Name</b></label>
+      {{form.name(placeholder='Enter Name', id="name")}}
+  
+      <label for="psw"><b>Password</b></label>
+      {{form.password(placeholder='Enter Password', id="psw")}}
+
+      <div class="add_to_your_post">
+        <span>add pfp</span>
+        <div>
+            <img id="selected-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Selected Image">
+            {{ form.pfp(id='img-upload-field') }}
+        </div>
+      </div>
+
+      <p>By creating an account you agree to our <a href="#" class="blue">Terms & Privacy</a>.</p>
+      {{form.button(class="registerbtn",value='Register')}}
+    </div>
+  
+    <div class="container signin">
+      <p>Already have an account? <a href="/login" class="blue">Sign in</a>.</p>
+    </div>
+</form>
+
+<script>
+  window.onload = function() {
+      var message = '{{ message }}';
+      alert(message);
+  }
+</script>
+  
+{% endblock %}

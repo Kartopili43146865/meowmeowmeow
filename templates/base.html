@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    {% block style %}
+    {% endblock %}
+    <link href="../static/styles/navbar.css" rel="stylesheet">
+    <link href="../static/styles/base.css" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+    {% include "navbar.html"%}
+    <main>
+        <div class="posts">
+            {% block content %}
+            {% endblock %}
+        </div>
+        {% block friends%}
+        {% endblock %}
+    </main>
+</body>
+</html>

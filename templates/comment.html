@@ -1,0 +1,133 @@
+{% set d1 = element.created_at %}
+{% set d2 = current_time %}
+{% set delta = d2 - d1 %}
+{% set time = (delta.total_seconds() - 14400) %}
+<div class="post comments">
+    <div class="comment-avtor">
+        <div class="comment-flex">
+            <div></div>
+            <div>{{element.username }}'s post</div>
+            <div class="close" x-on:click="open = false">x</div>
+        </div>
+        <div class="line"></div>
+    </div>
+    <div class="detals">
+        <div class="avtor">
+           <img src="{{ element.pfp }}">
+            <div>
+                <p>
+                    {{element.username }} 
+                    {% if current_user.name == element.username %}
+                    <span>( You )</span>
+                    {% endif %}
+                </p>
+                {% if time > 31104000 %}
+                <span>{{(time / 31104000) | int}} year ago</span>
+                {% elif time > 2592000 %}
+                <span>{{(time / 2592000) | int}} month ago</span>
+                {% elif time > 86400 %}
+                <span>{{(time / 86400) | int}} day ago</span>
+                {% elif time > 3600 %}
+                <span>{{(time / 3600) | int}} hour ago</span>
+                {% elif time > 60 %}
+                <span>{{(time / 60) | int}} minute ago</span>
+                {% else %}
+                <span>{{time | int}} second ago</span>
+                {% endif %}
+         </div>
+        </div>
+        {% if current_user.name == element.username %}
+        <div class="more" x-data="{visible: false}">
+            <button class="btn" x-on:click="visible = !visible">...</button>
+            <div x-show="visible">
+                <a class="item" href="/edit/{{ element.id }}">edit</a>
+                <a  href="/delete/{{ element.id }}" class="item">delete</a>
+            </div>
+        </div> 
+        {% endif %}
+    </div>
+    <img class="post-img" src="{{element.img}}">
+    <h2 class="title">{{element.title}}</h2>
+    <div class="line"></div>
+    <div class="reactions">
+        {% if current_user in element.liked_by %}
+        <form action="{{ url_for('like') }}" method="post" class="button clicked">
+            <input type="hidden" name="post_id" value="{{ element.id }}">
+            <button type="submit" class="like">
+            <div class="icon">i</div>
+            <div style="display: block;">
+                <p class="like">like</p>
+                <span>{{ element.like }}</span>
+            </div>
+            </button>
+        </form>
+        {% else %}
+        <form action="{{ url_for('like') }}" method="post" class="button">
+            <input type="hidden" name="post_id" value="{{ element.id }}">
+            <button type="submit" class="like">
+            <div class="icon">i</div>
+            <div style="display: block;">
+                <p class="like">like</p>
+                <span>{{ element.like }}</span>
+            </div>
+            </button>
+        </form>
+        {% endif %}
+        
+        {% if current_user in element.disliked_by %}
+        <form action="{{ url_for('dislike') }}" method="post" class="button clicked">
+            <input type="hidden" name="post_id" value="{{ element.id }}">
+            <button type="submit" class="like">
+            <div class="icon">i</div>
+            <div style="display: block;">
+                <p class="like">dislike</p>
+                <span>{{ element.dislike }}</span>
+            </div>
+            </button>
+        </form>
+        {% else %}
+        <form action="{{ url_for('dislike') }}" method="post" class="button">
+            <input type="hidden" name="post_id" value="{{ element.id }}">
+            <button type="submit" class="like">
+            <div class="icon">i</div>
+            <div style="display: block;">
+                <p class="like">dislike</p>
+                <span>{{ element.dislike }}</span>
+            </div>
+            </button>
+        </form>
+        {% endif %}
+        <button class="button">
+            <div class="icon">i</div>
+            <div>
+                <p>share</p><span>3232</span>
+            </div>
+        </button>
+            <div class="save icon">i</div>
+    </div>
+    <div class="line"></div>
+    {% for comment in comments%}
+    {% if comment.product_id == element.id %}
+    <div class="avtor">
+        <img src="{{comment.pfp}}">
+        <div class="comment">
+             <p>
+                 {{comment.username }} 
+             </p>
+             <div>{{ comment.comment }}</div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    {% if current_user.is_authenticated %}
+     <div class="add-comment">
+        <img src="{{ current_user.pfp }}">
+        <form action="/comment/{{element.id}}" method="post" class="textarea">
+            {{ form.hidden_tag() }}
+            {{ form.comment(placeholder=form.comment.label.text) }}
+            {{ form.button(value='send',class='btn') }}
+        </form>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link href="../static/styles/signup.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {{form.hidden_tag()}}
+    <div class="container">
+      <h1>log in</h1>
+  
+      <label for="name"><b>Name</b></label>
+      {{form.name(placeholder='Enter Name', id="name")}}
+  
+      <label for="psw"><b>Password</b></label>
+      {{form.password(placeholder='Enter Password', id="psw")}}
+  
+      {{form.button(class="registerbtn",value='log in')}}
+    </div>
+  
+    <div class="container signin">
+      <p>Already have an account? <a href="/signup" class="blue">Sign up</a>.</p>
+    </div>
+</form>
+    
+{% endblock %}
